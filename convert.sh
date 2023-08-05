@@ -56,7 +56,7 @@ function checks::anything_installed() {
 function checks::pacver() {
     local pacver=()
     mapfile -d ' ' -t pacver < <(pacstall -V)
-    if [[ ${pacver[0]} != "4.0.0" ]]; then
+    if [[ ! ${pacver[0]} =~ 4\.[0-9]+\.[0-9]+ ]]; then
         err "You are not running >=4.0.0! Rerun this script after updating from ${pacver[0]}"
         return 1
     fi
